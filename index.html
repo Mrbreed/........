@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardápio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(rgba(0,0,0,.42), rgba(0,0,0,.58)),
+        url("fundo.jpg") center/cover fixed no-repeat;
+      color: white;
+      overflow-x: hidden;
+    }
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 35px 20px;
+    }
+    .logo {
+      width: min(280px, 75vw);
+      max-height: 150px;
+      object-fit: contain;
+      margin-bottom: 55px;
+      filter: drop-shadow(0 5px 12px rgba(0,0,0,.45));
+    }
+    .logo-fallback {
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 55px;
+      text-shadow: 0 4px 12px rgba(0,0,0,.7);
+    }
+    .buttons {
+      width: min(420px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    button, .whatsapp {
+      border: 0;
+      border-radius: 16px;
+      padding: 20px 24px;
+      font-size: 20px;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: transform .18s, box-shadow .18s, opacity .18s;
+      box-shadow: 0 8px 25px rgba(0,0,0,.3);
+    }
+    button:hover, .whatsapp:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.4);
+    }
+    .menu-btn { background: white; color: #222; }
+    .whatsapp { background: #25D366; color: white; }
+    .screen {
+      display: none;
+      width: min(900px, 100%);
+      flex-direction: column;
+      align-items: center;
+    }
+    .screen.active { display: flex; }
+    .menu-image {
+      width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+      border-radius: 16px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.5);
+      background: white;
+    }
+    .back {
+      margin-top: 20px;
+      background: rgba(255,255,255,.92);
+      color: #222;
+      width: min(300px, 100%);
+    }
+    @media (max-width: 600px) {
+      .container { padding-top: 25px; }
+      .logo { margin-bottom: 35px; }
+      button, .whatsapp { font-size: 18px; padding: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+
+    <!-- TELA INICIAL -->
+    <section id="home" class="screen active">
+      <!-- Troque logo.png pela sua logo -->
+      <img class="logo" src="logo.png" alt="Logo" onerror="this.style.display='none'; document.getElementById('fallbackLogo').style.display='block';">
+      <div id="fallbackLogo" class="logo-fallback" style="display:none;">SUA LOGO</div>
+
+      <div class="buttons">
+        <button class="menu-btn" onclick="mostrarCardapio()">🍽️ Cardápio</button>
+
+    
+        <a class="whatsapp" href="https://chat.whatsapp.com/IzQ6TjjQFWY967514DUSRu" target="_blank" rel="noopener">
+          📲 Agende sua comida
+        </a>
+      </div>
+    </section>
+
+    <!-- TELA DO CARDÁPIO -->
+    <section id="cardapio" class="screen">
+      <!-- Troque cardapio.jpg pela imagem real do cardápio -->
+      <img class="menu-image" src="cardapio.jpg" alt="Cardápio">
+      <button class="back" onclick="voltar()">← Voltar</button>
+    </section>
+
+  </main>
+
+  <script>
+    function mostrarCardapio() {
+      document.getElementById("home").classList.remove("active");
+      document.getElementById("cardapio").classList.add("active");
+      window.scrollTo(0, 0);
+    }
+
+    function voltar() {
+      document.getElementById("cardapio").classList.remove("active");
+      document.getElementById("home").classList.add("active");
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+</html>
